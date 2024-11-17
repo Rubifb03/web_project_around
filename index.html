@@ -25,7 +25,7 @@
             <div class="profile__info">
               <div class="profile__header">
                 <h1 class="profile__header-title">Jacques Cousteau</h1>
-                <button class="profile__header-button"></button>
+                <button type="button" class="profile__header-button"></button>
               </div>
               <p class="profile_explored">Explorador</p>
             </div>
@@ -36,37 +36,35 @@
         </section>
         <section class="popup">
           <div class="popup__container">
-            <button class="popup__closed">
+            <button type="buttton" class="popup__close">
               <img
                 src="/images/Close Icon.png"
                 alt="Botón Cerrar"
-                class="popup__button-closed"
+                class="popup__close-button"
               />
             </button>
-            <h2 class="popup__tile">Editar perfil</h2>
-            <form class="form popup__form">
-              <fieldset class="form form__fielset">
-                <label for="name" class="form__label"></label>
-                <input
-                  name="name"
-                  type="text"
-                  class="form__input"
-                  id="name"
-                  placeholder="Nombre"
-                  required
-                />
-                <div class="popup__line"></div>
-                <label for="about" class="form__label"></label>
-                <input
-                  name="about"
-                  type="text"
-                  class="form__input"
-                  placeholder="Acerca de mi"
-                  required
-                />
-                <div class="popup__line"></div>
-                <button type="submit" class="form__button">Guardar</button>
-              </fieldset>
+            <h2 class="popup__title">Editar perfil</h2>
+            <form class="popup__form">
+              <input
+                name="name"
+                type="text"
+                class="popup__input popup__input_type_name"
+                id="name"
+                placeholder="Nombre"
+                required
+              />
+              <div class="popup__line"></div>
+              <input
+                name="about"
+                type="text"
+                class="popup__input popup__input_type_about"
+                placeholder="Acerca de mi"
+                required
+              />
+              <div class="popup__line"></div>
+              <button type="submit" class="popup__submit-button">
+                Guardar
+              </button>
             </form>
           </div>
         </section>

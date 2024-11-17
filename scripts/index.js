@@ -1,49 +1,31 @@
-let editProfile = document.querySelector(".profile__header-button");
-let popupSection = document.querySelector(".popup");
-let bodyElement = document.querySelector("body");
-let formElement = document.querySelector(".popup__form");
-let nameInput = document.querySelector("#name");
-let aboutInput = document.querySelector("#about");
-let profileHeader = document.querySelector(".profile__header-title");
-let profileExplorador = document.querySelector(".profile_explored");
-let saveButton = document.querySelector(".form__button");
-let closeButton = document.querySelector(".popup__closed");
+const openFormButton = document.querySelector(".profile__header-button");
+const popup = document.querySelector(".popup");
+const form = document.querySelector(".popup__form");
+const closeButton = popup.querySelector(".popup__close");
+const profileName = document.querySelector(".profile__header-title");
+const profileJob = document.querySelector(".profile_explored");
+const inputName = document.querySelector(".popup__input_type_name");
+const inputJob = document.querySelector(".popup__input_type_about");
 
-const firstName = profileHeader.textContent;
-const firstDescription = profileExplorador.textContent;
-
-editProfile.addEventListener("click", (event) => {
-  saveButton.setAttribute("disabled", true);
-  popupSection.style.display = "block";
-  bodyElement.style.overflow = "hidden";
-  nameInput.value = firstName || "";
-  aboutInput.value = firstDescription || "";
-});
-
-closeButton.addEventListener("click", (event) => {
-  popupSection.style.display = "none";
-  bodyElement.style.overflow = "auto";
-});
-
-nameInput.addEventListener("input", (event) => {
-  event.preventDefault();
-  let saveButton = document.querySelector(".form__button");
-  if (
-    firstDescription !== event.target.value ||
-    initialDescripcion !== aboutInput.value
-  ) {
-    saveButton.removeAttribute("disabled");
-  } else {
-    saveButton.setAttribute("disable", "");
-  }
-});
-
-formElement.addEventListener("submit", handleProfileFormSubmit);
-function handleProfileFormSubmit(event) {
-  event.preventDefault();
-  let formData = new FormData(event.target);
-  let formValues = Object.fromEntries(formData);
-  profileHeader.textContent = formValues.name;
-  profileExplorador.textContent = formValues.about;
-  popupSection.style.display = "none";
+function toggleForm() {
+  popup.classList.toggle("popup_visible");
 }
+
+openFormButton.addEventListener("click", toggleForm);
+closeButton.addEventListener("click", toggleForm);
+
+form.addEventListener("submit", handleFormSubmit);
+
+function handleFormSubmit(evt) {
+  evt.preventDefault();
+  profileName.textContent = inputName.value;
+  profileJob.textContent = inputJob.value;
+}
+
+form.addEventListener("submit", handleFormSubmit);
+
+/*function toggleForm() {
+  inputName.value = profileName.textContent;
+  inputJob.value = profileJob.textContent;
+  popup.classList.add(".popup_visible");
+}*/
