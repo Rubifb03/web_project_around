@@ -29,14 +29,14 @@
   border-radius: 5% 5% 0 0;
 }
 
-.element__footer {
+.elements__footer {
   display: flex;
   justify-content: space-between;
   align-items: center;
   margin: 0 auto;
 }
 
-.element__footer-name {
+.elements__footer-name {
   font-family: "Inter";
   font-style: normal;
   font-weight: 900;
@@ -47,7 +47,7 @@
   margin-left: 21px;
 }
 
-.element__button-like {
+.elements__button-like {
   background: url("../images/Vector.png");
   background-size: cover;
   box-sizing: content-box;
@@ -57,7 +57,7 @@
   margin-right: 8%;
 }
 
-.element__button-like:hover {
+.elements__button-like:hover {
   cursor: pointer;
 }
 

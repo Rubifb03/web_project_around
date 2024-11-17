@@ -3,7 +3,7 @@ const popup = document.querySelector(".popup");
 const form = document.querySelector(".popup__form");
 const closeButton = popup.querySelector(".popup__close");
 const profileName = document.querySelector(".profile__header-title");
-const profileJob = document.querySelector(".profile_explored");
+const profileJob = document.querySelector(".profile__description");
 const inputName = document.querySelector(".popup__input_type_name");
 const inputJob = document.querySelector(".popup__input_type_about");
 
