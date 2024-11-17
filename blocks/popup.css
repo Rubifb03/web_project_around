@@ -20,9 +20,8 @@
 
 .popup__closed {
   position: absolute;
-  top: 248px;
-  left: 500px;
-  right: 19px;
+  top: 150px;
+  left: 1000px;
   border: none;
   background-color: transparent;
 }
@@ -97,4 +96,28 @@
   line-height: 22px;
   text-align: center;
   color: #c4c4c4;
+}
+
+@media screen and (max-width: 320px) {
+  .popup__container {
+    max-width: 282px;
+  }
+  .popup__closed {
+    position: absolute;
+    top: 150px;
+    left: 250px;
+    border: none;
+    background-color: transparent;
+  }
+  .form {
+    margin: 0 auto;
+  }
+  .form__input {
+    max-width: 238px;
+  }
+
+  .form__button {
+    max-width: 238px;
+    background: #000000;
+  }
 }

@@ -91,3 +91,52 @@
 .profile__button-add:hover {
   cursor: pointer;
 }
+
+@media screen and (max-width: 320px) {
+  .profile {
+    max-width: 282px;
+    display: flex;
+    flex-direction: column;
+  }
+  .profile__avatar {
+    margin: 0 auto;
+  }
+  .profile__content {
+    display: flex;
+    flex-direction: column;
+    margin: 0 auto;
+  }
+  .profile__info {
+    display: flex;
+    flex-direction: column;
+  }
+  .profile__header {
+    gap: 10px;
+  }
+  .profile__header-title {
+    font-family: "Inter";
+    font-style: normal;
+    font-weight: 500;
+    font-size: 22px;
+    line-height: 27px;
+    text-align: center;
+    color: #ffffff;
+  }
+  .profile_explored {
+    font-family: "Inter";
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 17px;
+    text-align: center;
+    color: #ffffff;
+  }
+  .profile__header-button {
+    max-width: 8px;
+    height: 18px;
+    margin-top: 5px;
+  }
+  .profile__button {
+    justify-content: center;
+  }
+}

@@ -27,7 +27,7 @@ closeButton.addEventListener("click", (event) => {
 
 nameInput.addEventListener("input", (event) => {
   event.preventDefault();
-  let saveButton = document.querySelector(".popup__form");
+  let saveButton = document.querySelector(".form__button");
   if (
     firstDescription !== event.target.value ||
     initialDescripcion !== aboutInput.value
