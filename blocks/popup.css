@@ -12,6 +12,7 @@
 }
 
 .popup__container {
+  position: relative;
   max-width: 430px;
   width: 100%;
   display: flex;
@@ -24,18 +25,14 @@
 
 .popup__close {
   position: absolute;
-  top: 150px;
-  left: 1000px;
+  top: -76px;
+  right: -70px;
   border: none;
   background-color: transparent;
 }
 
 .popup__close-button {
   width: 32px;
-}
-
-.popup_visible {
-  visibility: visible;
 }
 
 .popup__close:hover {
@@ -100,26 +97,30 @@
   text-align: center;
   color: #c4c4c4;
 }
+.popup__submit-button:hover {
+  cursor: pointer;
+  background-color: #eeeeeeec;
+}
 
 @media screen and (max-width: 320px) {
   .popup__container {
     max-width: 282px;
   }
-  .popup__closed {
+  .popup__close {
     position: absolute;
-    top: 150px;
-    left: 250px;
+    top: -52px;
+    right: -3px;
     border: none;
     background-color: transparent;
   }
-  .form {
+  .popup__form {
     margin: 0 auto;
   }
-  .form__input {
+  .popup__input {
     max-width: 238px;
   }
 
-  .form__button {
+  .popup__submit-button {
     max-width: 238px;
     background: #000000;
   }

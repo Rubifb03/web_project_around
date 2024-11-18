@@ -92,6 +92,45 @@
   cursor: pointer;
 }
 
+@media screen and (max-width: 768px) {
+  .profile {
+    max-width: 282px;
+    display: flex;
+    flex-direction: column;
+  }
+  .profile__avatar {
+    margin: 0 auto;
+  }
+  .profile__content {
+    display: flex;
+    flex-direction: column;
+    margin: 0 auto;
+  }
+  .profile__info {
+    display: flex;
+    flex-direction: column;
+  }
+  .profile__header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .profile__header-title {
+    text-align: center;
+  }
+  .profile__description {
+    text-align: center;
+  }
+  .profile__header-button {
+    max-width: 8px;
+    height: 18px;
+    margin-top: 5px;
+  }
+  .profile__button {
+    justify-content: center;
+  }
+}
+
 @media screen and (max-width: 320px) {
   .profile {
     max-width: 282px;
