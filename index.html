@@ -39,7 +39,7 @@
             <button class="profile__button-add">+</button>
           </div>
         </section>
-        <section class="popup">
+        <section class="popup" id="popup-profile">
           <div class="popup__container">
             <button class="popup__close">
               <img
@@ -73,74 +73,82 @@
             </form>
           </div>
         </section>
+        <section class="popup" id="popup-place">
+          <div class="popup__container">
+            <button class="popup__close">
+              <img
+                src="/images/Close Icon.png"
+                alt="Botón Cerrar"
+                class="popup__close-button"
+              />
+            </button>
+            <h2 class="popup__title">Nuevo Lugar</h2>
+            <form class="popup__form">
+              <input
+                name="name"
+                type="text"
+                class="popup__input popup__input_type_name"
+                id="title_card"
+                placeholder="Título"
+                required
+              />
+              <div class="popup__line"></div>
+              <input
+                name="about"
+                type="text"
+                id="image_card"
+                class="popup__input popup__input_type_about"
+                placeholder="Enlace a la imagen"
+                required
+              />
+              <div class="popup__line"></div>
+              <button
+                id="btn_create_card"
+                type="submit"
+                class="popup__submit-button"
+              >
+                Crear
+              </button>
+            </form>
+          </div>
+        </section>
+        <section class="popup" id="popup-image">
+          <div class="popup__modal">
+            <button class="popup__modal-button">
+              <img
+                src="/images/Close Icon.png"
+                alt="Botón Cerrar"
+                class="popup__button-img"
+              />
+            </button>
+            <img src="" alt="imagenes" class="popup__modal-content" />
+            <p class="popup__modal-description"></p>
+          </div>
+        </section>
         <section class="elements">
           <div class="elements__grid">
-            <div class="elements__group">
-              <img
-                src="./images/kirill-pershin-1088404-unsplash.jpg"
-                alt="Imagen Valle de Yosemite"
-                class="elements__photo"
-              />
-              <div class="elements__footer">
-                <p class="elements__footer-name">Valle de Yosemite</p>
-                <button class="elements__button-like"></button>
+            <template id="elements-template">
+              <div class="elements__group">
+                <div class="block">
+                  <button class="elements__button-delete">
+                    <img
+                      class="button__delete"
+                      src="./images/Trash.png"
+                      alt="Botón Eliminar"
+                    />
+                  </button>
+                </div>
+                <img
+                  src=""
+                  alt="Imagen Valle de Yosemite"
+                  class="elements__photo"
+                />
+                <div class="elements__footer">
+                  <p class="elements__footer-name"></p>
+                  <button class="button__like"></button>
+                </div>
               </div>
-            </div>
-            <div class="elements__group">
-              <img
-                src="./images/kirill-pershin-1404681-unsplash.jpg"
-                alt="Imagen Valle de Yosemite"
-                class="elements__photo"
-              />
-              <div class="elements__footer">
-                <p class="elements__footer-name">Lago Louise</p>
-                <button class="elements__button-like"></button>
-              </div>
-            </div>
-            <div class="elements__group">
-              <img
-                src="./images/kirill-pershin-1556355-unsplash.png"
-                alt="Imagen Valle de Yosemite"
-                class="elements__photo"
-              />
-              <div class="elements__footer">
-                <p class="elements__footer-name">Montañas Calvas</p>
-                <button class="elements__button-like"></button>
-              </div>
-            </div>
-            <div class="elements__group">
-              <img
-                src="./images/kirill-pershin-1404681-unsplash.png"
-                alt="Imagen Valle de Yosemite"
-                class="elements__photo"
-              />
-              <div class="elements__footer">
-                <p class="elements__footer-name">Latemar</p>
-                <button class="elements__button-like"></button>
-              </div>
-            </div>
-            <div class="elements__group">
-              <img
-                src="./images/kirill-pershin-1556355-unsplash__0.png"
-                alt="Imagen Valle de Yosemite"
-                class="elements__photo"
-              />
-              <div class="elements__footer">
-                <p class="elements__footer-name">Vanois National...</p>
-                <button class="elements__button-like"></button>
-              </div>
-            </div>
-            <div class="elements__group">
-              <img
-                src="./images/kirill-pershin-1088404-unsplash__1.png"
-                alt="Imagen Valle de Yosemite"
-                class="elements__photo"
-              />
-              <div class="elements__footer">
-                <p class="elements__footer-name">Lago di Braies</p>
-                <button class="elements__button-like"></button>
-              </div>
-            </div>
+            </template>
           </div>
         </section>
       </main>
