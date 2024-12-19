@@ -47,6 +47,8 @@
   font-size: 42px;
   line-height: 48px;
   color: #ffffff;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .profile__header-button {
@@ -73,6 +75,8 @@
   font-size: 18px;
   line-height: 22px;
   color: #ffffff;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .profile__button {

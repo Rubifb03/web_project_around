@@ -59,26 +59,32 @@ const initialCards = [
   {
     name: "Valle Yosemite",
     link: "https://practicum-content.s3.us-west-1.amazonaws.com/new-markets/WEB_sprint_5/ES/yosemite.jpg",
+    alt: "Imagen Valle Yosemite",
   },
   {
     name: "Lago Louise",
     link: "https://practicum-content.s3.us-west-1.amazonaws.com/new-markets/WEB_sprint_5/ES/lake-louise.jpg",
+    alt: "Imagen Lago Louise",
   },
   {
     name: "Montaña Calva",
     link: "https://practicum-content.s3.us-west-1.amazonaws.com/new-markets/WEB_sprint_5/ES/bald-mountains.jpg",
+    alt: "ImagenMontaña Calva",
   },
   {
     name: "Latemar",
     link: "https://practicum-content.s3.us-west-1.amazonaws.com/new-markets/WEB_sprint_5/ES/latemar.jpg",
+    alt: "Imagen Latemar",
   },
   {
     name: "La Vanoise",
     link: "https://practicum-content.s3.us-west-1.amazonaws.com/new-markets/WEB_sprint_5/ES/vanoise.jpg",
+    alt: "Imagen La Vanoise",
   },
   {
     name: "Lago di Braies",
     link: "https://practicum-content.s3.us-west-1.amazonaws.com/new-markets/WEB_sprint_5/ES/lago.jpg",
+    alt: "Imagen Lago di Braies",
   },
 ];
 
@@ -88,11 +94,13 @@ function fillCards() {
       .querySelector(".elements__group")
       .cloneNode(true);
     const imageCard = newCard.querySelector(".elements__photo");
+    const imageAlt = newCard.querySelector(".elements__photo");
     const descriptionCard = newCard.querySelector(".elements__footer-name");
     const likeButtons = newCard.querySelector(".button__like");
     const deleteButton = newCard.querySelector(".elements__button-delete");
 
     imageCard.src = card.link;
+    imageAlt.alt = card.alt;
     descriptionCard.textContent = card.name;
 
     likeButtons.addEventListener("click", handleLikeButtonClick);
@@ -103,10 +111,12 @@ function fillCards() {
 
     const modal = document.getElementById("popup-image");
     const modalImage = modal.querySelector(".popup__modal-content");
+    const modalImageAlt = modal.querySelector(".popup__modal-content");
     const modalDescrition = modal.querySelector(".popup__modal-description");
 
     imageCard.addEventListener("click", function () {
       modalImage.src = card.link;
+      modalImageAlt.alt = card.alt;
       modalDescrition.textContent = card.name;
       modal.classList.toggle("popup_visible");
     });
@@ -128,9 +138,17 @@ function createCard(evt) {
     .cloneNode(true);
   const imageCard = newCard.querySelector(".elements__photo");
   const descriptionCard = newCard.querySelector(".elements__footer-name");
+  const likeButtons = newCard.querySelector(".button__like");
+  const deleteButton = newCard.querySelector(".elements__button-delete");
 
   imageCard.src = inputImage.value;
   descriptionCard.textContent = inputTitle.value;
+
+  likeButtons.addEventListener("click", handleLikeButtonClick);
+
+  deleteButton.addEventListener("click", function () {
+    newCard.remove();
+  });
 
   elementsGrid.prepend(newCard);
   toggleFormPlace();
