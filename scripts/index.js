@@ -1,3 +1,5 @@
+import "./validate.js";
+
 //POPUP EDITAR
 
 const openFormButton = document.querySelector(".profile__header-button");
@@ -7,7 +9,7 @@ const closeButton = popupProfile.querySelector(".popup__close");
 const profileName = document.querySelector(".profile__header-title");
 const profileJob = document.querySelector(".profile__description");
 const inputName = document.querySelector(".popup__input_type_name");
-const inputJob = document.querySelector(".popup__input_type_about");
+const inputJob = document.querySelector(".popup__input_type_description");
 const saveButton = document.querySelector(".popup__submit-button");
 
 //POPUP AÑADIR LUGAR
@@ -25,12 +27,35 @@ const elementsGrid = document.querySelector(".elements__grid");
 
 const btnCreateCard = document.querySelector("#btn_create_card");
 btnCreateCard.addEventListener("click", createCard);
-const inputTitle = document.querySelector("#title_card");
-const inputImage = document.querySelector("#image_card");
+const inputTitle = document.querySelector("#input-title");
+const inputImage = document.querySelector("#input-url");
 
 function toggleForm() {
   popupProfile.classList.toggle("popup_visible");
 }
+
+popupProfile.addEventListener("click", (event) => {
+  if (event.target === popupProfile) {
+    toggleForm();
+  }
+});
+
+popupPlace.addEventListener("click", (event) => {
+  if (event.target === popupPlace) {
+    toggleFormPlace();
+  }
+});
+
+document.addEventListener("keydown", (event) => {
+  if (event.key === "Escape") {
+    if (popupProfile.classList.contains("popup_visible")) {
+      toggleForm();
+    }
+    if (popupPlace.classList.contains("popup_visible")) {
+      toggleFormPlace();
+    }
+  }
+});
 
 openFormButton.addEventListener("click", toggleForm);
 closeButton.addEventListener("click", toggleForm);
@@ -53,7 +78,7 @@ closeButtonPlace.addEventListener("click", toggleFormPlace);
 
 // form.addEventListener("submit", handleFormSubmit);
 
-const openButtonAdd = document.querySelector("profile__button-add");
+const openButtonAdd = document.querySelector(".profile__button-add");
 
 const initialCards = [
   {

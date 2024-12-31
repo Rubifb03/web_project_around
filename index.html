@@ -49,25 +49,36 @@
               />
             </button>
             <h2 class="popup__title">Editar perfil</h2>
-            <form class="popup__form">
+            <form class="popup__form" id="edit-profile-form">
               <input
                 name="name"
                 type="text"
                 class="popup__input popup__input_type_name"
-                id="name"
+                id="input-name"
                 placeholder="Nombre"
                 required
+                minlength="2"
+                maxlength="30"
               />
+              <span class="popup__error" id="input-name-error"></span>
               <div class="popup__line"></div>
               <input
-                name="about"
+                name="description"
                 type="text"
-                class="popup__input popup__input_type_about"
+                class="popup__input popup__input_type_description"
+                id="input-description"
                 placeholder="Acerca de mi"
                 required
+                minlength="2"
+                maxlength="200"
               />
+              <span class="popup__error" id="input-description-error"></span>
               <div class="popup__line"></div>
-              <button type="submit" class="popup__submit-button">
+              <button
+                type="submit"
+                class="button popup__submit-button"
+                id="button-save"
+              >
                 Guardar
               </button>
             </form>
@@ -88,19 +99,24 @@
                 name="name"
                 type="text"
                 class="popup__input popup__input_type_name"
-                id="title_card"
+                id="input-title"
                 placeholder="Título"
                 required
+                minlength="2"
+                maxlength="30"
               />
+              <span class="popup__error" id="input-title-error"></span>
               <div class="popup__line"></div>
               <input
                 name="about"
                 type="text"
-                id="image_card"
+                id="input-url"
                 class="popup__input popup__input_type_about"
                 placeholder="Enlace a la imagen"
                 required
+                type="url"
               />
+              <span class="popup__error" id="input-url-error"></span>
               <div class="popup__line"></div>
               <button
                 id="btn_create_card"
@@ -152,6 +168,6 @@
         <p class="footer__copyright">&copy; 2024. Rubí Floreano</p>
       </footer>
     </div>
-    <script src="./scripts/index.js"></script>
+    <script src="./scripts/index.js" type="module"></script>
   </body>
 </html>
