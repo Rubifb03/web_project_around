@@ -54,6 +54,9 @@ document.addEventListener("keydown", (event) => {
     if (popupPlace.classList.contains("popup_visible")) {
       toggleFormPlace();
     }
+    if (modal.classList.contains("popup_visible")) {
+      modal.classList.remove("popup_visible");
+    }
   }
 });
 
@@ -113,6 +116,15 @@ const initialCards = [
   },
 ];
 
+const modal = document.getElementById("popup-image");
+
+modal.addEventListener("click", function (event) {
+  // Verifica si el clic ocurrió fuera del contenido del modal
+  if (!event.target.closest(".popup__modal")) {
+    modal.classList.remove("popup_visible");
+  }
+});
+
 function fillCards() {
   initialCards.forEach((card) => {
     const newCard = elementsTemplate.content
@@ -134,7 +146,6 @@ function fillCards() {
       newCard.remove();
     });
 
-    const modal = document.getElementById("popup-image");
     const modalImage = modal.querySelector(".popup__modal-content");
     const modalImageAlt = modal.querySelector(".popup__modal-content");
     const modalDescrition = modal.querySelector(".popup__modal-description");
@@ -155,6 +166,8 @@ function fillCards() {
     elementsGrid.prepend(newCard);
   });
 }
+
+// Cerrar el modal al hacer clic fuera del contenido del popup
 
 function createCard(evt) {
   evt.preventDefault();
