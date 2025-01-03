@@ -167,8 +167,6 @@ function fillCards() {
   });
 }
 
-// Cerrar el modal al hacer clic fuera del contenido del popup
-
 function createCard(evt) {
   evt.preventDefault();
   const newCard = elementsTemplate.content
@@ -186,6 +184,17 @@ function createCard(evt) {
 
   deleteButton.addEventListener("click", function () {
     newCard.remove();
+  });
+
+  const modalCard = modal.querySelector(".popup__modal-content");
+  const modalCardAlt = modal.querySelector(".popup__modal-content");
+  const modalCardDescrition = modal.querySelector(".popup__modal-description");
+
+  imageCard.addEventListener("click", function () {
+    modalCard.src = inputImage.value;
+    modalCardAlt.textContent = inputTitle.value;
+    modalCardDescrition.textContent = inputTitle.value;
+    modal.classList.toggle("popup_visible");
   });
 
   elementsGrid.prepend(newCard);
