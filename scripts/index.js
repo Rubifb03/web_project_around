@@ -1,4 +1,5 @@
 import "./validate.js";
+import Card from "./Card.js";
 
 //POPUP EDITAR
 
@@ -115,100 +116,32 @@ const initialCards = [
     alt: "Imagen Lago di Braies",
   },
 ];
-
 const modal = document.getElementById("popup-image");
-
-modal.addEventListener("click", function (event) {
-  // Verifica si el clic ocurrió fuera del contenido del modal
-  if (!event.target.closest(".popup__modal")) {
-    modal.classList.remove("popup_visible");
-  }
-});
-
 function fillCards() {
   initialCards.forEach((card) => {
-    const newCard = elementsTemplate.content
-      .querySelector(".elements__group")
-      .cloneNode(true);
-    const imageCard = newCard.querySelector(".elements__photo");
-    const imageAlt = newCard.querySelector(".elements__photo");
-    const descriptionCard = newCard.querySelector(".elements__footer-name");
-    const likeButtons = newCard.querySelector(".button__like");
-    const deleteButton = newCard.querySelector(".elements__button-delete");
-
-    imageCard.src = card.link;
-    imageAlt.alt = card.alt;
-    descriptionCard.textContent = card.name;
-
-    likeButtons.addEventListener("click", handleLikeButtonClick);
-
-    deleteButton.addEventListener("click", function () {
-      newCard.remove();
-    });
-
-    const modalImage = modal.querySelector(".popup__modal-content");
-    const modalImageAlt = modal.querySelector(".popup__modal-content");
-    const modalDescrition = modal.querySelector(".popup__modal-description");
-
-    imageCard.addEventListener("click", function () {
-      modalImage.src = card.link;
-      modalImageAlt.alt = card.alt;
-      modalDescrition.textContent = card.name;
-      modal.classList.toggle("popup_visible");
-    });
-
-    const closeModalButton = document.querySelector(".popup__modal-button");
-
-    closeModalButton.addEventListener("click", function () {
-      const modal = document.getElementById("popup-image");
-      modal.classList.remove("popup_visible"); // Oculta el modal
-    });
+    const newCard = new Card(
+      card.name,
+      card.link,
+      "#elements-template",
+      modal
+    ).getView();
+    console.log(newCard);
     elementsGrid.prepend(newCard);
   });
 }
 
 function createCard(evt) {
   evt.preventDefault();
-  const newCard = elementsTemplate.content
-    .querySelector(".elements__group")
-    .cloneNode(true);
-  const imageCard = newCard.querySelector(".elements__photo");
-  const descriptionCard = newCard.querySelector(".elements__footer-name");
-  const likeButtons = newCard.querySelector(".button__like");
-  const deleteButton = newCard.querySelector(".elements__button-delete");
-
-  imageCard.src = inputImage.value;
-  descriptionCard.textContent = inputTitle.value;
-
-  likeButtons.addEventListener("click", handleLikeButtonClick);
-
-  deleteButton.addEventListener("click", function () {
-    newCard.remove();
-  });
-
-  const modalCard = modal.querySelector(".popup__modal-content");
-  const modalCardAlt = modal.querySelector(".popup__modal-content");
-  const modalCardDescrition = modal.querySelector(".popup__modal-description");
-
-  imageCard.addEventListener("click", function () {
-    modalCard.src = inputImage.value;
-    modalCardAlt.textContent = inputTitle.value;
-    modalCardDescrition.textContent = inputTitle.value;
-    modal.classList.toggle("popup_visible");
-  });
-
+  const newCard = new Card(
+    inputTitle.value,
+    inputImage.value,
+    "#elements-template",
+    modal
+  ).getView();
+  console.log(newCard);
   elementsGrid.prepend(newCard);
+
   toggleFormPlace();
 }
-
-function handleLikeButtonClick(evt) {
-  evt.target.classList.toggle("button__like_active");
-}
-
-const likeButtons = document.querySelectorAll(".button__like");
-
-likeButtons.forEach((button) => {
-  button.addEventListener("click", handleLikeButtonClick);
-});
 
 fillCards();
