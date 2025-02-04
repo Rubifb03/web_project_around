@@ -1,88 +1,50 @@
-import "./validate.js";
 import Card from "./Card.js";
+import FormValidator from "./FormValidator.js";
+import Section from "./Section.js";
+import PopupWithImage from "./PopupWithImage.js";
+import PopupWithForm from "./PopupWithForm.js";
+import { Popup } from "./Popup.js";
+import UserInfo from "./UserInfo.js";
 
-//POPUP EDITAR
+//ABRIR POPUP EDITAR
 
-const openFormButton = document.querySelector(".profile__header-button");
-const popupProfile = document.querySelector("#popup-profile");
-const form = document.querySelector(".popup__form");
-const closeButton = popupProfile.querySelector(".popup__close");
-const profileName = document.querySelector(".profile__header-title");
-const profileJob = document.querySelector(".profile__description");
-const inputName = document.querySelector(".popup__input_type_name");
-const inputJob = document.querySelector(".popup__input_type_description");
-const saveButton = document.querySelector(".popup__submit-button");
+const btnPopupProfile = document.querySelector(".profile__header-button");
+const btnCloseProfile = document.querySelector(".popup__close-button");
 
-//POPUP AÑADIR LUGAR
+const popupProfile = new Popup("#popup-profile");
+popupProfile.setEventListeners();
 
-const openButtonAddPlace = document.querySelector(".profile__button-add");
-const popupPlace = document.querySelector("#popup-place");
-const closeButtonPlace = popupPlace.querySelector(".popup__close");
-
-//TEMPLATE
-
-const elementsTemplate = document.querySelector("#elements-template");
-const elementsGrid = document.querySelector(".elements__grid");
-
-// CARDS
-
-const btnCreateCard = document.querySelector("#btn_create_card");
-btnCreateCard.addEventListener("click", createCard);
-const inputTitle = document.querySelector("#input-title");
-const inputImage = document.querySelector("#input-url");
-
-function toggleForm() {
-  popupProfile.classList.toggle("popup_visible");
-}
-
-popupProfile.addEventListener("click", (event) => {
-  if (event.target === popupProfile) {
-    toggleForm();
+btnPopupProfile.addEventListener("click", (event) => {
+  if (event.target === btnPopupProfile) {
+    popupProfile.open();
   }
 });
 
-popupPlace.addEventListener("click", (event) => {
-  if (event.target === popupPlace) {
-    toggleFormPlace();
+btnCloseProfile.addEventListener("click", (event) => {
+  if (event.target === btnCloseProfile) {
+    popupProfile.close();
   }
 });
 
-document.addEventListener("keydown", (event) => {
-  if (event.key === "Escape") {
-    if (popupProfile.classList.contains("popup_visible")) {
-      toggleForm();
-    }
-    if (popupPlace.classList.contains("popup_visible")) {
-      toggleFormPlace();
-    }
-    if (modal.classList.contains("popup_visible")) {
-      modal.classList.remove("popup_visible");
-    }
+//ABRIR POPUP AÑADIR LUGAR
+
+const btnPopupPlace = document.querySelector(".profile__button-add");
+const btnClosePlace = document.querySelector("#tmp");
+
+const popupPlace = new Popup("#popup-place");
+popupPlace.setEventListeners();
+
+btnPopupPlace.addEventListener("click", (event) => {
+  if (event.target === btnPopupPlace) {
+    popupPlace.open();
   }
 });
 
-openFormButton.addEventListener("click", toggleForm);
-closeButton.addEventListener("click", toggleForm);
-
-function handleFormSubmit(evt) {
-  evt.preventDefault();
-  profileName.textContent = inputName.value;
-  profileJob.textContent = inputJob.value;
-  toggleForm();
-}
-
-form.addEventListener("submit", handleFormSubmit);
-
-function toggleFormPlace() {
-  popupPlace.classList.toggle("popup_visible");
-}
-
-openButtonAddPlace.addEventListener("click", toggleFormPlace);
-closeButtonPlace.addEventListener("click", toggleFormPlace);
-
-// form.addEventListener("submit", handleFormSubmit);
-
-const openButtonAdd = document.querySelector(".profile__button-add");
+btnClosePlace.addEventListener("click", (event) => {
+  if (event.target === btnClosePlace) {
+    popupPlace.close();
+  }
+});
 
 const initialCards = [
   {
@@ -116,32 +78,102 @@ const initialCards = [
     alt: "Imagen Lago di Braies",
   },
 ];
-const modal = document.getElementById("popup-image");
-function fillCards() {
-  initialCards.forEach((card) => {
-    const newCard = new Card(
-      card.name,
-      card.link,
-      "#elements-template",
-      modal
-    ).getView();
-    console.log(newCard);
-    elementsGrid.prepend(newCard);
+
+//CREAR TARJETAS
+
+const cardSection = new Section(
+  {
+    items: initialCards,
+    renderer: (cardData) => {
+      const card = new Card(cardData, "#elements-template", handleCardClick);
+      const cardElement = card.getView();
+      cardSection.addItem(cardElement);
+    },
+  },
+  ".elements__grid"
+);
+cardSection.renderItems();
+
+//VALIDAR FORMULARIOS
+
+const validationSettings = {
+  formSelector: ".popup__form",
+  inputSelector: ".popup__input",
+  submitButtonSelector: ".popup__submit-button",
+  inactiveButtonClass: "popup__button_disabled",
+  inputErrorClass: "popup__input_type_error",
+  errorClass: "popup__error_visible",
+};
+
+const editFormElement = document.querySelector("#edit-profile-form");
+const addPlaceFormElement = document.querySelector("#add-place-form");
+
+const editFormValidator = new FormValidator(
+  validationSettings,
+  editFormElement
+);
+editFormValidator.enableValidation();
+
+const addPlaceFormValidator = new FormValidator(
+  validationSettings,
+  addPlaceFormElement
+);
+addPlaceFormValidator.enableValidation();
+
+//USERINFO
+
+const userInfo = new UserInfo({
+  nameElement: "#profile-name",
+  jobElement: "#profile-description",
+});
+
+//POPUPWITHFORM PROFILE
+
+const popupProfileForm = new PopupWithForm("#popup-profile", (formData) => {
+  userInfo.setUserInfo({
+    name: formData.name,
+    job: formData.description,
   });
+  popupProfileForm.close();
+});
+
+//MANEJAR TARJETA CLIC
+
+function handleCardClick(name, link) {
+  popupWithImage.open({ link, name });
 }
 
-function createCard(evt) {
-  evt.preventDefault();
-  const newCard = new Card(
-    inputTitle.value,
-    inputImage.value,
-    "#elements-template",
-    modal
-  ).getView();
-  console.log(newCard);
-  elementsGrid.prepend(newCard);
+//POPUP AÑADIR TARJETA LUGAR
 
-  toggleFormPlace();
-}
+const popupPlaceForm = new PopupWithForm("#popup-place", (formData) => {
+  const cardData = {
+    name: formData.title,
+    link: formData.link,
+  };
 
-fillCards();
+  //CREAR NUEVA TARJETA
+
+  const card = new Card(cardData, "#elements-template", handleCardClick);
+  const cardElement = card.getView();
+
+  //AGREGAR LA TARJETA A LA SECCIÓN
+  cardSection.addItem(cardElement);
+
+  popupPlaceForm.close();
+});
+
+//ABRIR POPUP IMG
+
+const popupWithImage = new PopupWithImage("#popup-image");
+popupWithImage.setEventListeners();
+const btnClosePopuImg = document.querySelector(".popup__button-img");
+
+btnClosePopuImg.addEventListener("click", (event) => {
+  if (event.target === btnClosePopuImg) {
+    popupWithImage.close();
+  }
+});
+
+popupProfileForm.setEventListeners();
+popupWithImage.setEventListeners();
+popupPlaceForm.setEventListeners();

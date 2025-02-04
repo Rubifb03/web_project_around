@@ -1,25 +1,34 @@
 export default class Card {
-  constructor(name, link, cardSelector, modal) {
-    this._name = name;
-    this._link = link;
-    this._cardSelector = cardSelector;
-    this._modal = modal;
+  constructor(data, templateSelector, handleCardClick) {
+    this._name = data.name;
+    this._link = data.link;
+    this._templateSelector = templateSelector;
+    this._handleCardClick = handleCardClick;
+
+    // this._imageCard = this._element.querySelector(".elements__photo");
+    // this._descriptionCard = this._element.querySelector(
+    //   ".elements__footer-name"
+    // );
 
     this._handleLikeButton = this._handleLikeButton.bind(this);
     this._handleDeleteCard = this._handleDeleteCard.bind(this);
-
     this._handleImageClick = this._handleImageClick.bind(this);
-    this._closeModal = this._closeModal.bind(this);
   }
   _getTemplate() {
-    return document
-      .querySelector(this._cardSelector)
+    const cardElement = document
+      .querySelector(this._templateSelector)
       .content.querySelector(".elements__group")
       .cloneNode(true);
+
+    return cardElement;
   }
 
   _handleDeleteCard() {
     this._element.remove();
+  }
+
+  _handleImageClick() {
+    this._handleCardClick(this._name, this._link);
   }
 
   _setEventListeners() {
@@ -33,19 +42,11 @@ export default class Card {
 
     this._imageCard = this._element.querySelector(".elements__photo");
     this._imageCard.addEventListener("click", this._handleImageClick);
-
-    this._closeModalButton = this._modal.querySelector(".popup__modal-button");
-    this._closeModalButton.addEventListener("click", this._closeModal);
-
-    this._modal.addEventListener("click", (evt) => {
-      if (evt.target === this._modal) {
-        this._closeModal();
-      }
-    });
   }
 
   getView() {
     this._element = this._getTemplate();
+
     this._imageCard = this._element.querySelector(".elements__photo");
     this._descriptionCard = this._element.querySelector(
       ".elements__footer-name"
@@ -62,20 +63,5 @@ export default class Card {
 
   _handleLikeButton() {
     this._likeButton.classList.toggle("button__like_active");
-  }
-
-  _handleImageClick() {
-    this._modalImage = this._modal.querySelector(".popup__modal-content");
-    this._modalDescrition = this._modal.querySelector(
-      ".popup__modal-description"
-    );
-
-    this._modalImage.src = this._link;
-    this._modalDescrition.textContent = this._name;
-    this._modal.classList.add("popup_visible");
-  }
-
-  _closeModal() {
-    this._modal.classList.remove("popup_visible");
   }
 }
