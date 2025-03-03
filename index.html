@@ -12,27 +12,37 @@
   <body style="margin: 0">
     <div class="page">
       <header class="header">
-        <img
-          src="./images/Vector.png"
-          alt="Logo Titulo"
-          class="header__image"
-        />
+        <img src="./images/aound.png" alt="Logo Titulo" class="header__image" />
         <img src="./images/Line.png" alt="Linea" class="header__image-line" />
       </header>
       <main class="content">
         <section class="profile">
           <div class="profile__content">
-            <img
-              src="./images/Avatar.jpg"
-              alt="Foto Avatra"
-              class="profile__avatar"
-            />
+            <div class="profile__avatar-container">
+              <img
+                src="./images/Avatar.jpg"
+                alt="Foto Avatar"
+                class="profile__avatar"
+                id="profile-avatar"
+              />
+              <button class="profile__avatar-button" type="button">
+                <img
+                  src="./images/Lapiz Editar.png"
+                  alt="Editar foto"
+                  class="profile__avatar-edit"
+                />
+              </button>
+            </div>
             <div class="profile__info">
               <div class="profile__header">
-                <h1 class="profile__header-title" id="profile-name">Jacques Cousteau</h1>
+                <h1 class="profile__header-title" id="profile-name">
+                  Jacques Cousteau
+                </h1>
                 <button type="button" class="profile__header-button"></button>
               </div>
-              <p class="profile__description" id="profile-description">Explorador</p>
+              <p class="profile__description" id="profile-description">
+                Explorador
+              </p>
             </div>
           </div>
           <div class="profile__button">
@@ -91,7 +101,7 @@
                 src="/images/CloseIcon.png"
                 alt="Botón Cerrar"
                 class="popup__close-button"
-                id="tmp"
+                id="place-close"
               />
             </button>
             <h2 class="popup__title">Nuevo Lugar</h2>
@@ -145,8 +155,8 @@
           <div class="elements__grid">
             <template id="elements-template">
               <div class="elements__group">
-                <div class="block">
-                  <button class="elements__button-delete">
+                <div class="elements__card">
+                  <button class="elements__button-delete" type="button">
                     <img
                       class="button__delete"
                       src="./images/Trash.png"
@@ -161,6 +171,60 @@
                 </div>
               </div>
             </template>
+          </div>
+        </section>
+        <section class="popup" id="popup-delete">
+          <div class="popup__container">
+            <button class="popup__close" type="button">
+              <img
+                src="/images/CloseIcon.png"
+                alt="Botón Cerrar"
+                class="popup__close-button"
+                id="close-delete"
+              />
+            </button>
+            <h2 class="popup__title">¿Estás seguro?</h2>
+            <form class="popup__form" id="popup-delete-card">
+              <button
+                type="button"
+                class="button popup__submit-button popup__submit-yes"
+                id="button-delete"
+              >
+                Sí
+              </button>
+            </form>
+          </div>
+        </section>
+        <section class="popup" id="popup-avatar">
+          <div class="popup__container">
+            <button class="popup__close">
+              <img
+                src="/images/CloseIcon.png"
+                alt="Botón Cerrar"
+                class="popup__close-button"
+                id="perfil-close"
+              />
+            </button>
+            <h2 class="popup__title">Cambiar foto de perfil</h2>
+            <form class="popup__form" id="change-avatar-form">
+              <input
+                name="link"
+                id="url-photo"
+                class="popup__input popup__input_type_about"
+                placeholder="Enlace a la imagen"
+                required
+                type="url"
+              />
+              <span class="popup__error" id="input-url-error"></span>
+              <div class="popup__line"></div>
+              <button
+                id="Button-SaveProfile"
+                type="submit"
+                class="popup__submit-button"
+              >
+                Guardar
+              </button>
+            </form>
           </div>
         </section>
       </main>

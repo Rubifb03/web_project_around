@@ -5,6 +5,7 @@ import PopupWithImage from "./PopupWithImage.js";
 import PopupWithForm from "./PopupWithForm.js";
 import { Popup } from "./Popup.js";
 import UserInfo from "./UserInfo.js";
+import { api } from "./Api.js";
 
 //ABRIR POPUP EDITAR
 
@@ -29,7 +30,7 @@ btnCloseProfile.addEventListener("click", (event) => {
 //ABRIR POPUP AÑADIR LUGAR
 
 const btnPopupPlace = document.querySelector(".profile__button-add");
-const btnClosePlace = document.querySelector("#tmp");
+const btnClosePlace = document.querySelector("#place-close");
 
 const popupPlace = new Popup("#popup-place");
 popupPlace.setEventListeners();
@@ -45,54 +46,6 @@ btnClosePlace.addEventListener("click", (event) => {
     popupPlace.close();
   }
 });
-
-const initialCards = [
-  {
-    name: "Valle Yosemite",
-    link: "https://practicum-content.s3.us-west-1.amazonaws.com/new-markets/WEB_sprint_5/ES/yosemite.jpg",
-    alt: "Imagen Valle Yosemite",
-  },
-  {
-    name: "Lago Louise",
-    link: "https://practicum-content.s3.us-west-1.amazonaws.com/new-markets/WEB_sprint_5/ES/lake-louise.jpg",
-    alt: "Imagen Lago Louise",
-  },
-  {
-    name: "Montaña Calva",
-    link: "https://practicum-content.s3.us-west-1.amazonaws.com/new-markets/WEB_sprint_5/ES/bald-mountains.jpg",
-    alt: "ImagenMontaña Calva",
-  },
-  {
-    name: "Latemar",
-    link: "https://practicum-content.s3.us-west-1.amazonaws.com/new-markets/WEB_sprint_5/ES/latemar.jpg",
-    alt: "Imagen Latemar",
-  },
-  {
-    name: "La Vanoise",
-    link: "https://practicum-content.s3.us-west-1.amazonaws.com/new-markets/WEB_sprint_5/ES/vanoise.jpg",
-    alt: "Imagen La Vanoise",
-  },
-  {
-    name: "Lago di Braies",
-    link: "https://practicum-content.s3.us-west-1.amazonaws.com/new-markets/WEB_sprint_5/ES/lago.jpg",
-    alt: "Imagen Lago di Braies",
-  },
-];
-
-//CREAR TARJETAS
-
-const cardSection = new Section(
-  {
-    items: initialCards,
-    renderer: (cardData) => {
-      const card = new Card(cardData, "#elements-template", handleCardClick);
-      const cardElement = card.getView();
-      cardSection.addItem(cardElement);
-    },
-  },
-  ".elements__grid"
-);
-cardSection.renderItems();
 
 //VALIDAR FORMULARIOS
 
@@ -125,16 +78,22 @@ addPlaceFormValidator.enableValidation();
 const userInfo = new UserInfo({
   nameElement: "#profile-name",
   jobElement: "#profile-description",
+  avatarElement: ".profile__avatar",
 });
 
 //POPUPWITHFORM PROFILE
 
 const popupProfileForm = new PopupWithForm("#popup-profile", (formData) => {
-  userInfo.setUserInfo({
-    name: formData.name,
-    job: formData.description,
-  });
-  popupProfileForm.close();
+  api
+    .updateUserProfile({
+      name: formData.name,
+      about: formData.description,
+    })
+    .then((updateUserInfo) => {
+      userInfo.setUserInfo(updateUserInfo);
+      popupProfileForm.close();
+    })
+    .catch((error) => console.error("Error al actualizar perfil:", error));
 });
 
 //MANEJAR TARJETA CLIC
@@ -150,16 +109,18 @@ const popupPlaceForm = new PopupWithForm("#popup-place", (formData) => {
     name: formData.title,
     link: formData.link,
   };
-
-  //CREAR NUEVA TARJETA
-
-  const card = new Card(cardData, "#elements-template", handleCardClick);
-  const cardElement = card.getView();
-
-  //AGREGAR LA TARJETA A LA SECCIÓN
-  cardSection.addItem(cardElement);
-
-  popupPlaceForm.close();
+  api
+    .createCard(cardData)
+    .then((newCardData) => {
+      console.log("Datos de la nueva tarjeta:", newCardData);
+      const card = new Card(newCardData, "#elements-template", handleCardClick);
+      const cardElement = card.getView();
+      cardSection.addItem(cardElement);
+      popupPlaceForm.close();
+    })
+    .catch((error) => {
+      console.error("Error al crear la tarjeta:", error);
+    });
 });
 
 //ABRIR POPUP IMG
@@ -174,6 +135,95 @@ btnClosePopuImg.addEventListener("click", (event) => {
   }
 });
 
+api
+  .getInitialCards()
+  .then((cards) => {
+    cardSection.renderItems(cards);
+  })
+  .catch((error) => {
+    console.error("Error al obtener las tarjetas:", error);
+  });
+
+const cardSection = new Section(
+  {
+    items: [],
+    renderer: (cardData) => {
+      const card = new Card(cardData, "#elements-template", handleCardClick);
+      const cardElement = card.getView();
+      cardSection.addItem(cardElement);
+    },
+  },
+  ".elements__grid"
+);
+
+api
+  .getUserInformation()
+  .then((response) => {
+    userInfo.setUserInfo({
+      name: response.name,
+      job: response.about,
+    });
+    userInfo.setUserInfo(updateUserInfo);
+  })
+  .catch((error) => {
+    console.error("Error al obtener la información del usuario:", error);
+  });
+
+//INSTANCIA DE POPUPWITHCONFIRMATION
+
+const cardContainer = document.querySelector(".elements__grid");
+
+cardContainer.addEventListener("click", (evt) => {});
+
+//CERRAR POPUP DELETE
+
+const btnClosePopupDelete = document.querySelector("#close-delete");
+
+const popupDelete = new Popup("#popup-delete");
+popupDelete.setEventListeners();
+
+btnClosePopupDelete.addEventListener("click", (event) => {
+  if (event.target === btnClosePopupDelete) {
+    popupDelete.close();
+  }
+});
+
+//ABIR Y CERRAR POPUP EDITAR FOTO DE PERFIL
+
+const btnPopupEdit = document.querySelector(".profile__avatar-edit");
+const btnClosePopupEdit = document.querySelector("#perfil-close");
+
+let popupEditProfile = new Popup("#popup-avatar");
+popupEditProfile.setEventListeners();
+
+btnPopupEdit.addEventListener("click", (event) => {
+  if (event.target === btnPopupEdit) {
+    popupEditProfile.open();
+  }
+});
+
+btnClosePopupEdit.addEventListener("click", (event) => {
+  if (event.target === btnClosePopupEdit) {
+    popupEditProfile.close();
+  }
+});
+
+const popupAvatar = new PopupWithForm("#popup-avatar", (data) => {
+  console.log(data);
+  return api
+    .updateProfilePhoto({ avatar: data.link })
+    .then(() => {
+      userInfo.setUserAvatar(data.link);
+      popupAvatar.close();
+    })
+    .catch((error) => {
+      console.error("Error al actualizar la foto de perfil:", error);
+    });
+});
+
 popupProfileForm.setEventListeners();
 popupWithImage.setEventListeners();
 popupPlaceForm.setEventListeners();
+popupDelete.setEventListeners();
+popupEditProfile.setEventListeners();
+popupAvatar.setEventListeners();

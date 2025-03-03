@@ -6,7 +6,7 @@
   bottom: 0;
   background-color: rgba(0, 0, 0, 0.5);
   z-index: 1;
-  visibility: hidden; /* Oculto por defecto */
+  visibility: hidden;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -129,16 +129,9 @@
 }
 
 .popup__modal-button {
-  /* position: absolute;
-  top: -76px;
-  left: 500px;
-  cursor: pointer;
-  background-color: transparent;
-  border: none; */
-
   position: absolute;
-  top: -81px; /* Ajusta la posición vertical */
-  right: -43px; /* Ajusta la posición horizontal */
+  top: -81px;
+  right: -43px;
   cursor: pointer;
   background-color: transparent;
   border: none;
@@ -180,6 +173,10 @@
 
 .popup__error_visible {
   display: block;
+}
+
+.popup__submit-yes {
+  margin-top: 2px;
 }
 
 @media screen and (max-width: 768px) {

@@ -47,7 +47,6 @@
 }
 
 .elements__footer {
-  /* display: flex; */
   justify-content: space-between;
   align-items: center;
   display: flex;
@@ -62,7 +61,7 @@
   font-size: 23px;
   color: #000000;
   white-space: nowrap;
-  overflow: hidden; 
+  overflow: hidden;
   text-overflow: ellipsis;
 }
 

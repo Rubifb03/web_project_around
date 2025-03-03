@@ -1,7 +1,12 @@
 export class Popup {
   constructor(popupSelector) {
     this._popup = document.querySelector(popupSelector);
+    console.log("Popup encontrado:", this._popup);
     this._handleEscClose = this._handleEscClose.bind(this);
+
+    if (!this._popup) {
+      console.error("Elemento popup no encontrado");
+    }
   }
 
   open() {

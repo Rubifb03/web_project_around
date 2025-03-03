@@ -29,6 +29,9 @@ export default class FormValidator {
   }
 
   _checkInputValidity(inputElement) {
+    console.log(
+      `Validando input: ${inputElement.name}, valor: ${inputElement.value}`
+    );
     if (!inputElement.validity.valid) {
       this._showInputError(inputElement, inputElement.validationMessage);
     } else {

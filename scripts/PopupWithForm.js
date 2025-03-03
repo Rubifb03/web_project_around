@@ -7,6 +7,8 @@ export default class PopupWithForm extends Popup {
     this._handleFormSubmit = handleFormSubmit;
     this._form = this._popup.querySelector(".popup__form");
     this._inputList = this._popup.querySelectorAll(".popup__input");
+    this._submitButton = this._form.querySelector(".popup__submit-button");
+    this._submitButtonText = this._submitButton.textContent;
   }
 
   _getInputValues() {
@@ -17,12 +19,31 @@ export default class PopupWithForm extends Popup {
     return formValues;
   }
 
+  _toggleLoadingState(isLoading) {
+    if (isLoading) {
+      this._submitButton.textContent = "Guardando...";
+    } else {
+      this._submitButton.textContent = this._submitButtonText;
+    }
+  }
+
   setEventListeners() {
     super.setEventListeners();
 
     this._form.addEventListener("submit", (event) => {
       event.preventDefault();
-      this._handleFormSubmit(this._getInputValues());
+
+      this._toggleLoadingState(true);
+
+      this._handleFormSubmit(this._getInputValues())
+        .then(() => {
+          console.log("Formulario enviado exitosamente");
+          this.close();
+        })
+        .catch((error) => {
+          console.error("Error al enviar formulario", error);
+        })
+        .finally(() => this._toggleLoadingState(false));
     });
   }
 
