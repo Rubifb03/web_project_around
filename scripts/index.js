@@ -159,11 +159,12 @@ const cardSection = new Section(
 api
   .getUserInformation()
   .then((response) => {
+    console.log(response.avatar);
     userInfo.setUserInfo({
       name: response.name,
       job: response.about,
     });
-    userInfo.setUserInfo(updateUserInfo);
+    userInfo.setUserAvatar(response.avatar);
   })
   .catch((error) => {
     console.error("Error al obtener la información del usuario:", error);
@@ -212,8 +213,8 @@ const popupAvatar = new PopupWithForm("#popup-avatar", (data) => {
   console.log(data);
   return api
     .updateProfilePhoto({ avatar: data.link })
-    .then(() => {
-      userInfo.setUserAvatar(data.link);
+    .then((updatedUserInfo) => {
+      userInfo.setUserAvatar(updatedUserInfo.avatar);
       popupAvatar.close();
     })
     .catch((error) => {

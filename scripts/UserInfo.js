@@ -23,6 +23,8 @@ export default class UserInfo {
   }
 
   setUserAvatar(newUrlAvatar) {
+    console.log(newUrlAvatar);
+    console.log(this._avatarElement);
     this._avatarElement.src = newUrlAvatar;
   }
 }

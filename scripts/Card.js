@@ -6,7 +6,7 @@ export default class Card {
     this._name = data.name;
     this._link = data.link;
     this._id = data._id;
-    console.log(data);
+
     this._templateSelector = templateSelector;
     this._handleCardClick = handleCardClick;
     this._api = api;
