@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="author" content="Rubí Floreano" />
+    <meta name="description" content="Alrededor de los EEUU" />
+    <meta name="keywords" content="html, css, javascript" />
+    <link rel="stylesheet" href="./pages/index.css" />
+    <title>Alrededor de los EEUU</title>
+  </head>
+  <body style="margin: 0">
+    <div class="page">
+      <header class="header">
+        <img src="./images/aound.png" alt="Logo Titulo" class="header__image" />
+        <img src="./images/Line.png" alt="Linea" class="header__image-line" />
+      </header>
+      <main class="content">
+        <section class="profile">
+          <div class="profile__content">
+            <div class="profile__avatar-container">
+              <img
+                src="./images/Avatar.jpg"
+                alt="Foto Avatar"
+                class="profile__avatar"
+                id="profile-avatar"
+              />
+              <button class="profile__avatar-button" type="button">
+                <img
+                  src="./images/Lapiz Editar.png"
+                  alt="Editar foto"
+                  class="profile__avatar-edit"
+                />
+              </button>
+            </div>
+            <div class="profile__info">
+              <div class="profile__header">
+                <h1 class="profile__header-title" id="profile-name">
+                  Jacques Cousteau
+                </h1>
+                <button type="button" class="profile__header-button"></button>
+              </div>
+              <p class="profile__description" id="profile-description">
+                Explorador
+              </p>
+            </div>
+          </div>
+          <div class="profile__button">
+            <button class="profile__button-add">+</button>
+          </div>
+        </section>
+        <section class="popup" id="popup-profile">
+          <div class="popup__container">
+            <button class="popup__close">
+              <img
+                src="/images/CloseIcon.png"
+                alt="Botón Cerrar"
+                class="popup__close-button"
+              />
+            </button>
+            <h2 class="popup__title">Editar perfil</h2>
+            <form class="popup__form" id="edit-profile-form">
+              <input
+                name="name"
+                type="text"
+                class="popup__input popup__input_type_name"
+                id="input-name"
+                placeholder="Nombre"
+                required
+                minlength="2"
+                maxlength="30"
+              />
+              <span class="popup__error" id="input-name-error"></span>
+              <div class="popup__line"></div>
+              <input
+                name="description"
+                type="text"
+                class="popup__input popup__input_type_description"
+                id="input-description"
+                placeholder="Acerca de mi"
+                required
+                minlength="2"
+                maxlength="200"
+              />
+              <span class="popup__error" id="input-description-error"></span>
+              <div class="popup__line"></div>
+              <button
+                type="submit"
+                class="button popup__submit-button"
+                id="button-save"
+              >
+                Guardar
+              </button>
+            </form>
+          </div>
+        </section>
+        <section class="popup" id="popup-place">
+          <div class="popup__container">
+            <button class="popup__close">
+              <img
+                src="/images/CloseIcon.png"
+                alt="Botón Cerrar"
+                class="popup__close-button"
+                id="place-close"
+              />
+            </button>
+            <h2 class="popup__title">Nuevo Lugar</h2>
+            <form class="popup__form" id="add-place-form">
+              <input
+                name="title"
+                type="text"
+                class="popup__input popup__input_type_name"
+                id="input-title"
+                placeholder="Título"
+                required
+                minlength="2"
+                maxlength="30"
+              />
+              <span class="popup__error" id="input-title-error"></span>
+              <div class="popup__line"></div>
+              <input
+                name="link"
+                id="input-url"
+                class="popup__input popup__input_type_about"
+                placeholder="Enlace a la imagen"
+                required
+                type="url"
+              />
+              <span class="popup__error" id="input-url-error"></span>
+              <div class="popup__line"></div>
+              <button
+                id="btn_create_card"
+                type="submit"
+                class="popup__submit-button"
+              >
+                Crear
+              </button>
+            </form>
+          </div>
+        </section>
+        <section class="popup" id="popup-image">
+          <div class="popup__modal">
+            <button class="popup__modal-button">
+              <img
+                src="/images/CloseIcon.png"
+                alt="Botón Cerrar"
+                class="popup__button-img"
+              />
+            </button>
+            <img src="" alt="" class="popup__modal-content" />
+            <p class="popup__modal-description"></p>
+          </div>
+        </section>
+        <section class="elements">
+          <div class="elements__grid">
+            <template id="elements-template">
+              <div class="elements__group">
+                <div class="elements__card">
+                  <button class="elements__button-delete" type="button">
+                    <img
+                      class="button__delete"
+                      src="./images/Trash.png"
+                      alt="Botón Eliminar"
+                    />
+                  </button>
+                </div>
+                <img src="" alt="" class="elements__photo" />
+                <div class="elements__footer">
+                  <p class="elements__footer-name"></p>
+                  <button class="button__like"></button>
+                </div>
+              </div>
+            </template>
+          </div>
+        </section>
+        <section class="popup" id="popup-delete">
+          <div class="popup__container">
+            <button class="popup__close" type="button">
+              <img
+                src="/images/CloseIcon.png"
+                alt="Botón Cerrar"
+                class="popup__close-button"
+                id="close-delete"
+              />
+            </button>
+            <h2 class="popup__title">¿Estás seguro?</h2>
+            <form class="popup__form" id="popup-delete-card">
+              <button
+                type="button"
+                class="button popup__submit-button popup__submit-yes"
+                id="button-delete"
+              >
+                Sí
+              </button>
+            </form>
+          </div>
+        </section>
+        <section class="popup" id="popup-avatar">
+          <div class="popup__container">
+            <button class="popup__close">
+              <img
+                src="/images/CloseIcon.png"
+                alt="Botón Cerrar"
+                class="popup__close-button"
+                id="perfil-close"
+              />
+            </button>
+            <h2 class="popup__title">Cambiar foto de perfil</h2>
+            <form class="popup__form" id="change-avatar-form">
+              <input
+                name="link"
+                id="url-photo"
+                class="popup__input popup__input_type_about"
+                placeholder="Enlace a la imagen"
+                required
+                type="url"
+              />
+              <span class="popup__error" id="input-url-error"></span>
+              <div class="popup__line"></div>
+              <button
+                id="Button-SaveProfile"
+                type="submit"
+                class="popup__submit-button"
+              >
+                Guardar
+              </button>
+            </form>
+          </div>
+        </section>
+      </main>
+      <footer class="footer">
+        <p class="footer__copyright">&copy; 2024. Rubí Floreano</p>
+      </footer>
+    </div>
+    <script src="./scripts/index.js" type="module"></script>
+  </body>
+</html>
