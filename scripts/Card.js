@@ -44,7 +44,7 @@ export default class Card {
               cardElement.remove(); // Elimina la tarjeta del DOM
               console.log(cardElement);
 
-              popupDeleteConfirmation.close(); // Cierra el popup
+              popupDeleteConfirmation.close();
             })
             .catch((error) => {
               console.error("Error al eliminar la tarjeta:", error);
@@ -101,7 +101,7 @@ export default class Card {
       .like(this._id)
       .then(() => {
         this._likeButton.classList.toggle("button__like_active");
-        userLikes[this._id] = !userLikes[this._id];
+        // userLikes[this._id] = !userLikes[this._id];
       })
       .catch((error) => {
         console.error("Error al dar like a la tarjeta:", error);
@@ -109,6 +109,6 @@ export default class Card {
   }
 
   setLiked() {
-    this._likeButton.classList.add("button__like_active");
+    this._isLiked.classList.add("button__like_active");
   }
 }

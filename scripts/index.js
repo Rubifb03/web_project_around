@@ -84,7 +84,7 @@ const userInfo = new UserInfo({
 //POPUPWITHFORM PROFILE
 
 const popupProfileForm = new PopupWithForm("#popup-profile", (formData) => {
-  api
+  return api
     .updateUserProfile({
       name: formData.name,
       about: formData.description,
@@ -109,7 +109,7 @@ const popupPlaceForm = new PopupWithForm("#popup-place", (formData) => {
     name: formData.title,
     link: formData.link,
   };
-  api
+  return api
     .createCard(cardData)
     .then((newCardData) => {
       console.log("Datos de la nueva tarjeta:", newCardData);

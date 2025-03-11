@@ -37,7 +37,6 @@ export default class PopupWithForm extends Popup {
 
       this._handleFormSubmit(this._getInputValues())
         .then(() => {
-          console.log("Formulario enviado exitosamente");
           this.close();
         })
         .catch((error) => {
