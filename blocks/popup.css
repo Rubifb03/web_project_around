@@ -6,14 +6,14 @@
   bottom: 0;
   background-color: rgba(0, 0, 0, 0.5);
   z-index: 1;
-  visibility: hidden;
+  /* visibility: hidden; */
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
 .popup_visible {
-  visibility: visible;
+  /* visibility: visible; */
 }
 
 .popup__container {
@@ -97,7 +97,7 @@
   background-color: #ffffff;
   border: 0.5px solid #e0dbdb;
   color: #c4c4c4;
-  opacity: 0.7px;
+  /* opacity: 0.7px; */
 }
 
 .popup__submit-button {
@@ -121,11 +121,20 @@
 }
 
 .popup__modal {
-  display: flex;
+  /* display: flex;
   flex-direction: column;
   position: relative;
   background-color: transparent;
-  max-width: 50%;
+  max-width: 50%; */
+  /* position: relative; */
+  max-width: 430px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  /* background: #ffffff; */
+  box-shadow: 0px 0px 25px rgba(0, 0, 0, 0.15);
+  border-radius: 10px;
+  margin: 0 auto;
 }
 
 .popup__modal-button {
@@ -156,7 +165,7 @@
 }
 
 .popup__button_disabled {
-  opacity: 0.5;
+  /* opacity: 0.5; */
   cursor: normal;
 }
 
@@ -215,7 +224,7 @@
     height: 30vh;
   }
   .popup__modal-button {
-    top: -50px; /* Ajusta la posición vertical */
-    right: -10px; /* Ajusta la posición horizontal */
+    top: -50px;
+    right: -10px;
   }
 }
